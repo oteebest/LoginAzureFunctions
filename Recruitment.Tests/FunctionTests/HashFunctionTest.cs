@@ -32,7 +32,7 @@ namespace Recruitment.Tests.FunctionTests
         [Fact]
         public async Task ShouldHashRequest()
         {
-
+            //arrange
             HashRequestModel model = new HashRequestModel { Login = "Otee", Password = "Oteebest" };
 
 
@@ -46,6 +46,7 @@ namespace Recruitment.Tests.FunctionTests
 
             _httpRequest.Setup(x => x.Body).Returns(_memoryStream);
 
+            //act
             var response =   await HashFunction.Run(_httpRequest.Object, _logger.Object);
 
             //assert
