@@ -1,6 +1,7 @@
 ﻿using Moq;
 using Recruitment.Contracts.RequestModel;
 using Recruitment.Contracts.ResponseModel;
+using Recruitment.Core.Exceptions;
 using Recruitment.Core.Interfaces;
 using Recruitment.Core.Interfaces.Manager;
 using Recruitment.Core.Interfaces.Validation;
@@ -16,10 +17,10 @@ namespace Recruitment.Tests.ManagerTests
 {
     public class HashManagerTest
     {
-        private Mock<IRequestValidation> _reqValidation;
-        private Mock<IFunctionService> _funcService;
-        private HashManager _hashManager;
-        private HashResponseModel responseModel = new HashResponseModel { Hash_Value = "7287237c19bdb8c59d1869ea9174c713" };
+        private readonly Mock<IRequestValidation> _reqValidation;
+        private readonly Mock<IFunctionService> _funcService;
+        private readonly HashManager _hashManager;
+        private HashResponseModel responseModel = new HashResponseModel { hash_value = "7287237c19bdb8c59d1869ea9174c713" };
 
         public HashManagerTest()
         {
@@ -53,7 +54,34 @@ namespace Recruitment.Tests.ManagerTests
 
             Assert.NotNull(response);
 
-            Assert.NotNull(response.Hash_Value);
+            Assert.NotNull(response.hash_value);
+
+
+        }
+       
+        [Fact]
+        public async Task ShouldThrowProcessException()
+        {
+            //arrange
+            string validationMessage = "Provide Login";
+
+            HashRequestModel requestModel = new HashRequestModel { Login = "", Password = "Otee" };
+
+            _reqValidation.Setup(u => u.ValidateLoginRequest(requestModel, out validationMessage))
+                .Returns(false);
+
+            _funcService.Setup(u => u.Hash(It.IsAny<HashRequestModel>()))
+                .Returns(() => Task.FromResult(responseModel));
+
+            //act
+         
+            await Assert.ThrowsAsync<ProcessException>(() =>  _hashManager.HashAsync(requestModel));
+
+            //assert
+            _reqValidation.Verify(u => u.ValidateLoginRequest(It.IsAny<HashRequestModel>(), out validationMessage), Times.Once);
+
+            _funcService.Verify(u => u.Hash(It.IsAny<HashRequestModel>()), Times.Never);
+
 
 
         }

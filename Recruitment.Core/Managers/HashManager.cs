@@ -1,5 +1,6 @@
 ﻿using Recruitment.Contracts.RequestModel;
 using Recruitment.Contracts.ResponseModel;
+using Recruitment.Core.Exceptions;
 using Recruitment.Core.Interfaces;
 using Recruitment.Core.Interfaces.Manager;
 using Recruitment.Core.Interfaces.Validation;
@@ -24,18 +25,15 @@ namespace Recruitment.Core.Managers
 
         public async Task<HashResponseModel> HashAsync(HashRequestModel model)
         {
-            var success = _requestValidation.ValidateLoginRequest(model, out string message);
-
-            
+            var success = _requestValidation.ValidateLoginRequest(model, out string message);                        
             if(success)
             {
                 var response = await _funcService.Hash(model);
-
                 return response;
             }
             else
             {
-                throw new Exception($"Invalid request: {message}");
+                throw new ProcessException($"Invalid request: {message}");
             }
 
         }

@@ -6,6 +6,6 @@ namespace Recruitment.Contracts.ResponseModel
 {
     public class HashResponseModel
     {
-        public string Hash_Value{get; set;}
+        public string hash_value{get; set;}
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Recruitment.Contracts.RequestModel;
+using Recruitment.Core.Interfaces.Manager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,18 @@ namespace Recruitment.API.Controllers
     [ApiController]
     public class HashController : ControllerBase
     {
-        [HttpPost("")]
-        public async Task<IActionResult> Hash()
+        private IHashManager _hashManager;
+        public HashController(IHashManager hashManager)
         {
-            return Ok("");
+            _hashManager = hashManager;
+        }
+
+        [HttpPost("")]
+        public async Task<IActionResult> Hash(HashRequestModel model)
+        {
+            var responseModel = await _hashManager.HashAsync(model);
+
+            return Ok(responseModel);
         }
 
     }

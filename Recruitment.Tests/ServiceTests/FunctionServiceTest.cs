@@ -31,7 +31,7 @@ namespace Recruitment.Tests.ServiceTests
         {
             //arrange
             HashRequestModel model = new HashRequestModel { Login = "otee", Password = "oteebest" };
-            HashResponseModel responseModel = new HashResponseModel {  Hash_Value = "otee" };
+            HashResponseModel responseModel = new HashResponseModel {  hash_value = "otee" };
 
             var handlerMock = new Mock<HttpMessageHandler>();
             var httpResponse = new HttpResponseMessage
@@ -58,7 +58,7 @@ namespace Recruitment.Tests.ServiceTests
             //assert
             Assert.NotNull(service);
 
-            Assert.NotNull(serviceResponse.Hash_Value);
+            Assert.NotNull(serviceResponse.hash_value);
 
 
 

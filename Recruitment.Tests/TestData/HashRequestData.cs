@@ -11,10 +11,10 @@ namespace Recruitment.Tests.TestData
         public HashRequestData()
         {
             Add(new HashRequestModel { Login = "otee", Password = "oteebest" });
-            Add(new HashRequestModel { Login = "otee", Password = "oteebest" });
-            Add(new HashRequestModel { Login = "otee", Password = "oteebest" });
-            Add(new HashRequestModel { Login = "otee", Password = "oteebest" });
-            Add(new HashRequestModel { Login = "otee", Password = "oteebest" });
+            Add(new HashRequestModel { Login = "mena", Password = "Ziregbe" });
+            Add(new HashRequestModel { Login = "onome", Password = "Frank" });
+            Add(new HashRequestModel { Login = "tobechi", Password = "Okani" });
+            Add(new HashRequestModel { Login = "fromo", Password = "Adiaste" });
         }
 
     }
