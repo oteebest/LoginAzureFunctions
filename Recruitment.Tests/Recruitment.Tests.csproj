@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Recruitment.API\Recruitment.API.csproj" />
     <ProjectReference Include="..\Recruitment.Contracts\Recruitment.Contracts.csproj" />
     <ProjectReference Include="..\Recruitment.Core\Recruitment.Core.csproj" />
   </ItemGroup>
