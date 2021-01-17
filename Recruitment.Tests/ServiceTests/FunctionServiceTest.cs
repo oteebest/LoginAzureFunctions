@@ -48,7 +48,7 @@ namespace Recruitment.Tests.ServiceTests
                   ItExpr.IsAny<CancellationToken>())
                .ReturnsAsync(httpResponse);
             var httpClient = new HttpClient(handlerMock.Object);
-            httpClient.BaseAddress = new Uri( "https://google.com" );
+            httpClient.BaseAddress = new Uri("http://localhost:7071");
 
             FunctionService service = new FunctionService(httpClient);
 
