@@ -18,7 +18,7 @@ namespace Recruitment.API.Controllers
         {
             _hashManager = hashManager;
         }
-
+        
         [HttpPost("")]
         public async Task<IActionResult> Hash(HashRequestModel model)
         {

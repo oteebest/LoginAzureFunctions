@@ -27,7 +27,7 @@ namespace Recruitment.Tests.ControllerTests
         }
 
         [Fact]
-        public async Task Hash()
+        public async Task ShouldReturnHasValue()
         {
             //arrange
             _hashManager.Setup(u => u.HashAsync(It.IsAny<HashRequestModel>()))
